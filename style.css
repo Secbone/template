@@ -1,0 +1,105 @@
+html,body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
+	background-color: #eee;
+}
+h1{
+	margin: 0;
+	padding: 0;
+}
+.main{
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	min-width: 100%;
+}
+header{
+	overflow: hidden;
+	box-shadow: 0 1px 10px #666;
+	height: 45%;
+	min-width: 100%;
+	padding-bottom: 10px;
+	background-color: #efefef;
+}
+footer{
+	overflow: hidden;
+	box-shadow: 0 -1px 10px #666;
+	height: 45%;
+	min-width: 100%;
+	padding-top: 10px;
+	background-color: #efefef;
+}
+.title{
+	position: relative;
+	margin-top: 0;
+	margin-bottom: 0;
+	width: 100%;
+	text-align: center;
+	height: 10%;
+}
+.title h1{
+	font-family: '微软雅黑',Arial;
+	display: inline-block;
+	position: absolute;
+	font-size: 2.5em;
+	width: 100%;
+	text-align: center;
+	bottom: 50%;
+	left: 0;
+	margin-bottom: -20px;
+	color: rgba(0,0,0,0.2);
+}
+.left_cover{
+	position: absolute;
+	top: 0;
+	right: 50%;
+	margin-right: 450px;
+	width: 30%;
+	height: 100%;
+	background: -moz-linear-gradient(left, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+	background: -webkit-linear-gradient(left, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+	background: -o-linear-gradient(left, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+	background: -ms-linear-gradient(left, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+	background: linear-gradient(left, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+}
+.right_cover{
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: 450px;
+	width: 30%;
+	height: 100%;
+	background: -moz-linear-gradient(right, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+	background: -webkit-linear-gradient(right, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+	background: -o-linear-gradient(right, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+	background: -ms-linear-gradient(right, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+	background: linear-gradient(right, rgba(238,238,238,1), rgba(238,238,238,1) 80%,rgba(238,238,238,0) 100%);
+}
+header div{
+	overflow: hidden;
+	padding: 0 10px;
+}
+.inner_content{
+	display: inline-block;
+	left: 50%;
+	top: 0;
+	margin:0 auto;
+	height: 100%;
+	width: 860px;
+	border-left: 1px dotted #bbb;
+	border-right: 1px dotted #bbb;
+}
+.out_left{
+	float: left;
+	right: 50%;
+	width: 25%;
+	height: 100%;
+}
+.out_right{
+	float: right;
+	left: 50%;
+	width: 25%;
+	height: 100%;
+}
