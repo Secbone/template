@@ -2,15 +2,26 @@
 <html>
 <head>
 	<meta charset="utf8">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<div class="page"></div>
+	<div class="mouse_holder"></div>
+	<div class="page">
+		<input class="" type="text">
+		<div style="height:2000px"></div>
+	</div>
 </body>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0-beta1.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
 <script type="text/javascript">
+	$(".page").mCustomScrollbar({theme: "dark"});
+	$("body > div").click(function(e){e.stopPropagation()});
+	$(".mouse_holder").mouseover(function(){
+		$(".page").addClass("show");
+	})
 	$("body").click(function(){
-		$(".page").toggleClass("show");
+		$(".page").removeClass("show");
 	});
 </script>
 </html>
