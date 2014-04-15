@@ -1,0 +1,22 @@
+/**************** End Of Function ***************/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/wwwroot\/default\/template\/css\/sass\/style415\.scss}line{font-family:\0000359}}
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/wwwroot\/default\/template\/css\/sass\/style415\.scss}line{font-family:\0000366}}
+#meteor {
+  height: 100%;
+  width: 100%; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/wwwroot\/default\/template\/css\/sass\/style415\.scss}line{font-family:\0000370}}
+.dotbg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(http://imgcache.qq.com/mediastyle/musicradio/img/mask.png); }

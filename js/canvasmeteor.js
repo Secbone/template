@@ -1,0 +1,132 @@
+(function(){
+	var Meteor = {
+		collection: [],
+		stars: [],
+		init: function(){
+			var self = this;
+			this.canvas = document.getElementById('meteor');
+
+			this.width = document.body.offsetWidth;
+			this.height = document.body.offsetHeight;
+
+			this.canvas.setAttribute("width", this.width);
+			this.canvas.setAttribute("height", this.height);
+
+			window.addEventListener("resize", function(){
+				self.resize(self);
+			});
+
+			if(this.canvas.getContext){
+				this.ctx = this.canvas.getContext("2d");
+			}
+
+			//this.ctx.shadowOffsetX = 0;
+			//this.ctx.shadowOffsetY = 0;
+			//this.ctx.shadowBlur = 5;
+			//this.ctx.shadowColor = "white";
+
+			this.deg = 30;
+
+			this.initMeteor(5);
+			this.initStar(20);
+
+			this.loop();
+		},
+		resize: function(self){
+			self.width = document.body.offsetWidth;
+			self.height = document.body.offsetHeight;
+
+			self.canvas.setAttribute("width", self.width);
+			self.canvas.setAttribute("height", self.height);
+		},
+		drawLine: function(meteor){
+			var startx = meteor.x;
+			var starty = meteor.y;
+			var len = meteor.len;
+
+			var stopx = Math.cos(2*Math.PI/360*this.deg) * len + startx;
+			var stopy = Math.sin(2*Math.PI/360*this.deg) * len + starty;
+
+			var gradient = this.ctx.createLinearGradient(startx, starty, stopx, stopy);
+			gradient.addColorStop(0, "transparent");
+			gradient.addColorStop(1, "white");
+
+			this.ctx.beginPath();
+			this.ctx.moveTo(startx, starty);
+			this.ctx.lineTo(stopx, stopy);
+			this.ctx.lineWidth = meteor.width;
+			this.ctx.strokeStyle = gradient;
+			this.ctx.stroke();
+		},
+		drawCircle: function(star){
+			this.ctx.beginPath(); 
+			this.ctx.arc(star.x, star.y, star.radius, 0, Math.PI*2, true);
+
+			this.ctx.fillStyle = "white"; 
+			this.ctx.fill();
+		},
+		loop: function(){
+			var self = this;
+			var doloop = function(){
+				self.clearSceen();
+				for(var i in self.stars){
+					self.drawCircle(self.stars[i]);
+				}
+				for(var i in self.collection){
+					var item = self.collection[i];
+					self.drawLine(item);
+					self.collection[i] = self.renewMeteor(item);
+				}
+				setTimeout(doloop, 40);
+			};
+			doloop();
+		},
+		initMeteor: function(number){
+			for (var i = 0; i < number; i++) {
+				this.newMeteor();
+			};
+		},
+		newMeteor: function(){
+			var self = this;
+			var meteor = {
+				x: -Math.random() * self.width,
+				y: -Math.random() * self.height,
+				width: Math.random() * 1 + 0.2,
+				len: Math.random() * 200 + 200,
+				speed: Math.random() * 50 + 50,
+			};
+			this.collection.push(meteor);
+		},
+		renewMeteor: function(meteor){
+			if(meteor.x > this.canvas.offsetWidth || meteor.y > this.canvas.offsetHeight){
+				meteor.x = -Math.random() * this.width;
+				meteor.y = -Math.random() * this.height;
+			}else{
+				meteor.x = Math.cos(2*Math.PI/360*this.deg) * meteor.speed + meteor.x;
+				meteor.y = Math.sin(2*Math.PI/360*this.deg) * meteor.speed + meteor.y;
+			}
+
+			return meteor;
+		},
+		initStar: function(number){
+			var self = this;
+			for (var i = 0; i < number; i++) {
+				var star = {
+					x: Math.random() * self.width,
+					y: Math.random() * self.height,
+					radius: Math.random(),
+				};
+				this.stars.push(star);
+			};
+		},
+		clearSceen: function(){
+			var cheight = this.canvas.offsetHeight;
+			var cwidth = this.canvas.offsetWidth;
+			this.ctx.fillStyle = "black";
+			this.ctx.fillRect(0, 0, this.width, this.height);
+		},
+	};
+
+	Meteor.init();
+	
+})();

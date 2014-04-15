@@ -1,0 +1,77 @@
+$_prefix: normal;
+
+@mixin CSS3($property, $value){
+	-webkit-#{$property}: $value;
+	-moz-#{$property}: $value;
+	-ms-#{$property}: $value;
+	-o-#{$property}: $value;
+	#{$property}: $value;
+}
+@mixin frameproperty($property, $value){
+	@if $_prefix == normal {
+		#{$property}: $value;
+	}@else{
+		-#{$_prefix}-#{$property}: $value;
+	}
+}
+@mixin transition($property: all, $duration: 0.2s, $type: linear, $delay: 0){
+	@include CSS3(transition, $property $duration $type $delay);
+}
+@mixin animation($name, $duration: 0.2s, $timing: linear, $delay: 0, $count: infinite, $direction: normal, $state: running){
+	@include CSS3(animation-name, $name);
+	@include CSS3(animation-duration, $duration);
+	@include CSS3(animation-timing-function, $timing);
+	@include CSS3(animation-delay, $delay);
+	@include CSS3(animation-iteration-count, $count);
+	@include CSS3(animation-direction, $direction);
+	@include CSS3(animation-play-state, $state);
+}
+@mixin keyframes($name, $content: null){
+	@-webkit-keyframes $name{
+		$_prefix: webkit;
+		@content;
+		$_prefix: normal;
+	}
+	@-moz-keyframes $name{
+		$_prefix: moz;
+		@content;
+		$_prefix: normal;
+	}
+	@-ms-keyframes $name{
+		$_prefix: ms;
+		@content;
+		$_prefix: normal;
+	}
+	@-o-keyframes $name{
+		$_prefix: o;
+		@content;
+		$_prefix: normal;
+	}
+	@keyframes $name{
+		$_prefix: normal;
+		@content;
+		$_prefix: normal;
+	}
+}
+
+/**************** End Of Function ***************/
+
+html,body{
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+#meteor{
+	height: 100%;
+	width: 100%;
+}
+.dotbg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url(http://imgcache.qq.com/mediastyle/musicradio/img/mask.png);
+}
