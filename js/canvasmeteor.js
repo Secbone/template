@@ -20,15 +20,13 @@
 				this.ctx = this.canvas.getContext("2d");
 			}
 
-			//this.ctx.shadowOffsetX = 0;
-			//this.ctx.shadowOffsetY = 0;
-			//this.ctx.shadowBlur = 5;
-			//this.ctx.shadowColor = "white";
+			this.bgColor = "#424242";
+			this.lightColor = "a4a4a4";
 
 			this.deg = 30;
 
 			this.initMeteor(5);
-			this.initStar(20);
+			this.initStar(40);
 
 			this.loop();
 		},
@@ -48,21 +46,33 @@
 			var stopy = Math.sin(2*Math.PI/360*this.deg) * len + starty;
 
 			var gradient = this.ctx.createLinearGradient(startx, starty, stopx, stopy);
-			gradient.addColorStop(0, "transparent");
-			gradient.addColorStop(1, "white");
+			gradient.addColorStop(0, this.bgColor);
+			gradient.addColorStop(1, this.lightColor);
 
 			this.ctx.beginPath();
 			this.ctx.moveTo(startx, starty);
 			this.ctx.lineTo(stopx, stopy);
 			this.ctx.lineWidth = meteor.width;
+			this.ctx.shadowBlur = 0;
 			this.ctx.strokeStyle = gradient;
 			this.ctx.stroke();
 		},
 		drawCircle: function(star){
-			this.ctx.beginPath(); 
+			this.ctx.beginPath();
 			this.ctx.arc(star.x, star.y, star.radius, 0, Math.PI*2, true);
 
-			this.ctx.fillStyle = "white"; 
+			this.ctx.shadowOffsetX = 0;
+			this.ctx.shadowOffsetY = 0;
+
+			if(Math.random() > 0.9){
+				this.ctx.shadowBlur = star.radius * 3;
+			}else{
+				this.ctx.shadowBlur = 0;
+			}
+
+			this.ctx.shadowColor = this.lightColor;
+
+			this.ctx.fillStyle = this.lightColor; 
 			this.ctx.fill();
 		},
 		loop: function(){
@@ -122,7 +132,7 @@
 		clearSceen: function(){
 			var cheight = this.canvas.offsetHeight;
 			var cwidth = this.canvas.offsetWidth;
-			this.ctx.fillStyle = "black";
+			this.ctx.fillStyle = this.bgColor;
 			this.ctx.fillRect(0, 0, this.width, this.height);
 		},
 	};
