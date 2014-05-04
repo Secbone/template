@@ -2,9 +2,18 @@
 	var Meteor = {
 		collection: [],
 		stars: [],
-		init: function(){
+		option: {
+			id: "",
+			bgColor: "#424242",
+			lightColor: "#a4a4a4",
+			deg: 30,
+			meteor: 5,
+			star: 40,
+		},
+		init: function(option){
 			var self = this;
-			this.canvas = document.getElementById('meteor');
+			this.extend(option);
+			this.canvas = document.getElementById(option.id);
 
 			this.width = document.body.offsetWidth;
 			this.height = document.body.offsetHeight;
@@ -20,15 +29,21 @@
 				this.ctx = this.canvas.getContext("2d");
 			}
 
-			this.bgColor = "#424242";
-			this.lightColor = "a4a4a4";
+			//this.bgColor = "#424242";
+			//this.lightColor = "a4a4a4";
 
-			this.deg = 30;
+			//this.deg = 30;
 
-			this.initMeteor(5);
-			this.initStar(40);
+			this.initMeteor(this.option.meteor);
+			this.initStar(this.option.star);
 
 			this.loop();
+		},
+		extend: function(setOptions){
+			for(var key in setOptions){
+				this.option[key] = setOptions[key];
+			}
+			return this.option;
 		},
 		resize: function(self){
 			self.width = document.body.offsetWidth;
@@ -42,12 +57,12 @@
 			var starty = meteor.y;
 			var len = meteor.len;
 
-			var stopx = Math.cos(2*Math.PI/360*this.deg) * len + startx;
-			var stopy = Math.sin(2*Math.PI/360*this.deg) * len + starty;
+			var stopx = Math.cos(2*Math.PI/360*this.option.deg) * len + startx;
+			var stopy = Math.sin(2*Math.PI/360*this.option.deg) * len + starty;
 
 			var gradient = this.ctx.createLinearGradient(startx, starty, stopx, stopy);
-			gradient.addColorStop(0, this.bgColor);
-			gradient.addColorStop(1, this.lightColor);
+			gradient.addColorStop(0, this.option.bgColor);
+			gradient.addColorStop(1, this.option.lightColor);
 
 			this.ctx.beginPath();
 			this.ctx.moveTo(startx, starty);
@@ -70,9 +85,9 @@
 				this.ctx.shadowBlur = 0;
 			}
 
-			this.ctx.shadowColor = this.lightColor;
+			this.ctx.shadowColor = this.option.lightColor;
 
-			this.ctx.fillStyle = this.lightColor; 
+			this.ctx.fillStyle = this.option.lightColor; 
 			this.ctx.fill();
 		},
 		loop: function(){
@@ -112,8 +127,8 @@
 				meteor.x = -Math.random() * this.width;
 				meteor.y = -Math.random() * this.height;
 			}else{
-				meteor.x = Math.cos(2*Math.PI/360*this.deg) * meteor.speed + meteor.x;
-				meteor.y = Math.sin(2*Math.PI/360*this.deg) * meteor.speed + meteor.y;
+				meteor.x = Math.cos(2*Math.PI/360*this.option.deg) * meteor.speed + meteor.x;
+				meteor.y = Math.sin(2*Math.PI/360*this.option.deg) * meteor.speed + meteor.y;
 			}
 
 			return meteor;
@@ -132,11 +147,11 @@
 		clearSceen: function(){
 			var cheight = this.canvas.offsetHeight;
 			var cwidth = this.canvas.offsetWidth;
-			this.ctx.fillStyle = this.bgColor;
+			this.ctx.fillStyle = this.option.bgColor;
 			this.ctx.fillRect(0, 0, this.width, this.height);
 		},
 	};
 
-	Meteor.init();
+	Meteor.init({id: "meteor"});
 	
 })();
