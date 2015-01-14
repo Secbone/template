@@ -4,7 +4,8 @@
 		stars: [],
 		option: {
 			id: "",
-			bgColor: "#424242",
+			//bgColor: "#424242",
+			bgColor: "#081537",
 			lightColor: "#a4a4a4",
 			deg: 30,
 			meteor: 5,
@@ -87,7 +88,7 @@
 
 			this.ctx.shadowColor = this.option.lightColor;
 
-			this.ctx.fillStyle = this.option.lightColor; 
+			this.ctx.fillStyle = this.option.lightColor;
 			this.ctx.fill();
 		},
 		loop: function(){
@@ -153,5 +154,5 @@
 	};
 
 	Meteor.init({id: "meteor"});
-	
+
 })();
